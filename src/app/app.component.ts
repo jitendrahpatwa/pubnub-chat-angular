@@ -6,7 +6,7 @@ import { PubNubAngular } from 'pubnub-angular2';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  userId: string;
+  userId: string = "test-channel";
   newMessage: string;
   channelName: string;
   status = {};
@@ -14,11 +14,11 @@ export class AppComponent {
   messages: any[];
   pubnub: PubNubAngular;
   constructor(pubnub: PubNubAngular) {
-    this.channelName = 'channel1';
+    this.channelName = 'SecretChat';
 
     pubnub.init({
-      publishKey: 'demo',
-      subscribeKey: 'demo',
+      publishKey: 'pub-c-df5e8c32-64f3-4242-8116-704ff14549b8',
+      subscribeKey: 'sub-c-7395a458-1791-11e6-b700-0619f8945a4f',
       uuid: this.userId,
       triggerEvent: true
     });
@@ -26,6 +26,7 @@ export class AppComponent {
     pubnub.subscribe({ channels: [this.channelName], triggerEvents: true });
 
     pubnub.getStatus(this.channelName, (status) => {
+	 // console.log(status);
       this.status = status;
     });
 
